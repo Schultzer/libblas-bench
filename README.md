@@ -1,7 +1,7 @@
 ## libblas-bench
 [![CircleCI](https://circleci.com/gh/Schultzer/libblas-bench.svg?style=svg)](https://circleci.com/gh/Schultzer/libblas-bench)
 
-Looking at the benchmark running on circleci libblas is eqaul or faster then Intel-MKL.
+Looking at the benchmark running on circleci libblas is eqaul or faster then Intel-MKL on f64.
 
 [https://circleci.com/gh/Schultzer/libblas-bench/6]
 ### Intel-MKL on CircleCI
