@@ -1,0 +1,26 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/rust:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: project-cache
+      - run:
+          name: Setup
+          command: |
+            sudo apt-get install build-essential curl file git cmake make gfortran gnuplot
+            curl -o rustup-init.sh https://sh.rustup.rs
+            sh rustup-init.sh -y
+            rustup install nightly
+            rustup install stable
+      - run:
+          name: Test
+          command: RUSTFLAGS='-C target-cpu=native' rustup run stable cargo bench
+      - save_cache:
+          key: project-cache
+          paths:
+            - "~/.cargo"
+            - "./target"

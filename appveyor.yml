@@ -1,0 +1,17 @@
+os: Visual Studio 2013
+
+environment:
+  matrix:
+    - channel: nightly
+      target: x86_64-pc-windows-gnu
+
+install:
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init -y --default-toolchain %channel% --default-host %target%
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+
+build: false
+
+test_script:
+  - cargo build
+  - RUSTFLAGS='-C target-cpu=native' cargo bench
