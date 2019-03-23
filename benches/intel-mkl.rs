@@ -3,6 +3,7 @@ extern crate criterion;
 extern crate blas;
 extern crate blas_src;
 extern crate rand;
+extern crate matrixmultiply;
 use rand::Rng;
 use blas::*;
 use criterion::Criterion;
@@ -116,15 +117,40 @@ fn gemm_big() {
     ));
 }
 
+fn matrixmultiply_gemm() {
+    let mut rng = rand::thread_rng();
+    let mut big: Vec<f32> = Vec::new();
+    for _ in 0..36 {
+        big.push(rng.gen::<f32>())
+    }
+    criterion::black_box(unsafe {
+        matrixmultiply::sgemm(6, 6, 6, 0.3f32, big.as_ptr(), 0, 6, big.as_ptr(), 0, 6, -1.2f32, big.clone().as_mut_ptr(), 0, 6);
+    })
+}
+
+fn matrixmultiply_gemm_big() {
+    let mut rng = rand::thread_rng();
+    let mut big: Vec<f32> = Vec::new();
+    for _ in 0..1_000_000 {
+        big.push(rng.gen::<f32>())
+    }
+    criterion::black_box(unsafe {
+        matrixmultiply::sgemm(1000, 1000, 10, 0.3f32, big.as_ptr(), 0, 1000, big.as_ptr(), 0, 1000, -1.2f32, big.clone().as_mut_ptr(), 0, 1000);
+    })
+}
+
+
 fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("libblas::level3::gemm", |b| b.iter(|| gemm()));
     c.bench_function("libblas::level3::gemm big", |b| b.iter(|| gemm_big()));
     c.bench_function("libblas::level1::axpy", |b| b.iter(|| axpy()));
     c.bench_function("libblas::level1::axpy-big", |b| b.iter(|| axpy_big()));
-    c.bench_function("blas-src intel-mkl sgemm", |b| b.iter(|| blas_src_gemm()));
-    c.bench_function("blas-src intel-mkl sgemm big", |b| b.iter(|| blas_src_gemm_big()));
-    c.bench_function("blas-src intel-mkl saxpy", |b| b.iter(|| blas_src_axpy()));
-    c.bench_function("blas-src intel-mkl saxpy big", |b| { b.iter(|| blas_src_axpy_big())});
+    c.bench_function("matrixmultiply dgemm", |b| b.iter(|| matrixmultiply_gemm()));
+    c.bench_function("matrixmultiply dgemm big", |b| b.iter(|| matrixmultiply_gemm_big()));
+    c.bench_function("blas-src intel-mkl dgemm", |b| b.iter(|| blas_src_gemm()));
+    c.bench_function("blas-src intel-mkl dgemm big", |b| b.iter(|| blas_src_gemm_big()));
+    c.bench_function("blas-src intel-mkl daxpy", |b| b.iter(|| blas_src_axpy()));
+    c.bench_function("blas-src intel-mkl daxpy big", |b| { b.iter(|| blas_src_axpy_big())});
 }
 
 criterion_group!(benches, criterion_benchmark);
