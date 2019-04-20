@@ -206,7 +206,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "libblas"
 version = "0.1.0"
-source = "git+https://github.com/schultzer/libblas#f4e4c84a8de26a67b13c37ecad48615003ca116d"
+source = "git+https://github.com/schultzer/libblas?branch=use-pointers#709060abfb4c494a2bc884d76f8ba3b91462686b"
 dependencies = [
  "num-complex 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num-traits 0.2.6 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -219,7 +219,7 @@ dependencies = [
  "blas 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "blas-src 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "criterion 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
- "libblas 0.1.0 (git+https://github.com/schultzer/libblas)",
+ "libblas 0.1.0 (git+https://github.com/schultzer/libblas?branch=use-pointers)",
  "matrixmultiply 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "rand 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -595,7 +595,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum itertools 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = "5b8467d9c1cebe26feb08c640139247fac215782d35371ade9a2136ed6085358"
 "checksum itoa 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "1306f3464951f30e30d12373d31c79fbd52d236e5e896fd92f96ec7babbbe60b"
 "checksum lazy_static 1.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "bc5729f27f159ddd61f4df6228e827e86643d4d3e7c32183cb30a1c08f604a14"
-"checksum libblas 0.1.0 (git+https://github.com/schultzer/libblas)" = "<none>"
+"checksum libblas 0.1.0 (git+https://github.com/schultzer/libblas?branch=use-pointers)" = "<none>"
 "checksum libc 0.2.50 (registry+https://github.com/rust-lang/crates.io-index)" = "aab692d7759f5cd8c859e169db98ae5b52c924add2af5fbbca11d12fefb567c1"
 "checksum matrixmultiply 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "dcfed72d871629daa12b25af198f110e8095d7650f5f4c61c5bac28364604f9b"
 "checksum memchr 2.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "2efc7bc57c883d4a4d6e3246905283d8dae951bb3bd32f49d6ef297f546e1c39"

@@ -5,7 +5,7 @@ authors = ["Benjamin Schultzer <benjamin@schultzer.com>"]
 edition = "2018"
 
 [dependencies]
-libblas = { git = "https://github.com/schultzer/libblas" }
+libblas = { git = "https://github.com/schultzer/libblas", branch = "use-pointers" }
 rand = "0.5"
 criterion = "0.2"
 blas = "0.19"
